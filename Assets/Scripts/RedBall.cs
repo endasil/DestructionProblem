@@ -11,7 +11,12 @@ public class RedBall : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {               
         if (collision.gameObject.CompareTag("Blue") && dying == false)
-        {                        
+        {
+            var blueBall = collision.gameObject.GetComponent<BlueBall>();
+            if (blueBall.Dying == true)
+                return;
+            Debug.Log("Destroying");
+            blueBall.Dying = true;
             dying = true;
             Destroy(collision.gameObject);
             Destroy(gameObject);
